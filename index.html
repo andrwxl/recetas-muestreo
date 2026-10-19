@@ -4,41 +4,51 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Recetas de muestreo</title>
+<meta name="disable-adaptations" content="watch">
+<meta name="theme-color" content="#000">
 <style>
-:root{--bg:#fbfaf7;--fg:#1d1d1f;--muted:#6b6b70;--card:#fff;--line:#e4e2dc;--accent:#1f5fa8;--ok:#e8f3ea;--okb:#2e7d3c;--note:#fff6e0;--noteb:#c58a00;--th:#f1efe9}
-@media (prefers-color-scheme:dark){:root{--bg:#141416;--fg:#ececef;--muted:#a0a0a8;--card:#1d1d21;--line:#33333a;--accent:#7fb2ff;--ok:#1a2c1e;--okb:#6cc47c;--note:#2e2614;--noteb:#e0b040;--th:#26262c}}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
-main{max-width:860px;margin:0 auto;padding:24px 16px 80px}
-h1{font-size:1.9rem;margin:0 0 4px}
-.meta{color:var(--muted);margin:0 0 8px}
-nav{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 0;margin:16px 0 8px;display:flex;flex-wrap:wrap;gap:6px;z-index:5}
-nav a{font-size:.85rem;padding:4px 10px;border:1px solid var(--line);border-radius:99px;text-decoration:none;color:var(--accent);background:var(--card)}
-h2{font-size:1.45rem;margin:40px 0 8px;padding-top:8px;border-top:3px solid var(--accent)}
-h3{font-size:1.15rem;margin:28px 0 8px}
-.enun{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
-.tw{overflow-x:auto;margin:12px 0}
-table{border-collapse:collapse;width:100%;font-size:.9rem;background:var(--card)}
-th,td{border:1px solid var(--line);padding:5px 8px;text-align:center;white-space:nowrap}
-th{background:var(--th)}
-td.l{text-align:left;white-space:normal}
-tr.yes td{background:var(--ok);font-weight:600}
-ol li{margin:4px 0}
-ol ul{margin:4px 0;padding-left:20px}
-.ans{background:var(--ok);border-left:4px solid var(--okb);padding:10px 14px;border-radius:6px;margin:12px 0}
-.note{background:var(--note);border-left:4px solid var(--noteb);padding:10px 14px;border-radius:6px;margin:12px 0}
-.ord{color:var(--muted);font-size:.92rem}
-code{font-family:ui-monospace,Menlo,monospace;font-size:.92em}
+:root{--bg:#000;--fg:#fff;--muted:#9a9aa0;--card:#1c1c1e;--line:#2c2c2e;--accent:#0a84ff;--ok:#0f2a17;--okb:#30d158;--note:#2b2108;--noteb:#ffd60a}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.35 -apple-system,"SF Compact Text",system-ui,sans-serif;overflow-wrap:anywhere}
+main{padding:6px 8px 40px;max-width:100%}
+h1{font-size:18px;line-height:1.15;margin:4px 0 2px;text-align:center}
+.meta{color:var(--muted);font-size:12px;text-align:center;margin:0 0 6px}
+main>p{font-size:14px}
+nav{display:flex;flex-direction:column;gap:6px;margin:10px 0}
+nav a{display:block;padding:10px 12px;border-radius:22px;background:var(--card);color:var(--accent);text-decoration:none;font-size:15px;font-weight:600;text-align:center}
+h2{font-size:17px;line-height:1.2;margin:26px 0 8px;padding-top:10px;border-top:2px solid var(--accent);color:var(--accent)}
+h3{font-size:15px;margin:18px 0 6px;color:var(--okb)}
+.enun{background:var(--card);border-radius:12px;padding:8px 10px;font-size:13px;color:#d8d8dc}
+ol{padding-left:18px;margin:6px 0}
+ol li{margin:6px 0;font-size:14px}
+ol li::marker{color:var(--accent);font-weight:700}
+ol ul{margin:4px 0;padding-left:12px;font-size:13px}
+.ans{background:var(--ok);border-left:3px solid var(--okb);padding:8px 10px;border-radius:10px;margin:10px 0;font-size:14px}
+.note{background:var(--note);border-left:3px solid var(--noteb);padding:8px 10px;border-radius:10px;margin:10px 0;font-size:13px}
+.ord{color:var(--muted);font-size:12px}
+/* tablas como tarjetas */
+.tw{margin:8px 0}
+table,tbody,tr,td,th{display:block;width:100%}
+table{border:0}
+tr.hd{display:none}
+tr{background:var(--card);border-radius:12px;padding:6px 10px;margin:0 0 6px}
+tr.yes{background:var(--ok);outline:1px solid var(--okb)}
+td,th{display:flex;justify-content:space-between;gap:8px;padding:2px 0;font-size:13px;text-align:right;border:0;background:none}
+td::before,th::before{content:attr(data-label);color:var(--muted);text-align:left;flex-shrink:0;max-width:55%}
+td:empty,th:empty{display:none}
+td.l{text-align:right}
+.top{display:block;text-align:center;margin:14px 0 0;font-size:13px;color:var(--accent);text-decoration:none}
 </style>
 </head>
 <body>
 <main>
-<h1>Recetas de muestreo: ejercicios 1 a 3</h1>
+<h1 id="top">Recetas de muestreo: ejercicios 1 a 3</h1>
 <p class="meta">19 oct. 2026 · @LoremIpsum</p>
 <p>Cada ejercicio va como receta: qué piden, pasos numerados con el número que sale de cada uno, y la respuesta final.</p>
 
 <nav>
-<a href="#e1">1 · Sistemático</a><a href="#e2">2 · Poisson</a><a href="#e3">3 · PPT Acumulativo</a><a href="#e3l">3 · Lahiri</a><a href="#e3s">3 · Sunter</a>
+<a href="#e1">1 · Sistemático</a><a href="#e2">2 · Poisson</a><a href="#e3">3 · Acumulativo</a><a href="#e3l">3 · Lahiri</a><a href="#e3s">3 · Sunter</a>
 </nav>
 
 <!-- ============ EJERCICIO 1 ============ -->
@@ -107,6 +117,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em}
 <p class="ord"><b>Orden:</b> T₁, T₂ → t̂ → T̄ → s² → V̂ → √V̂ → CV.</p>
 <div class="note"><b>Nota:</b> la fórmula de δ y la de V̂ son las de Särndal; si tu curso usa otra versión, cambia solo esa fórmula y el resto de la receta se mantiene.</div>
 
+<a class="top" href="#top">↑ Índice</a>
 <!-- ============ EJERCICIO 2 ============ -->
 <h2 id="e2">Ejercicio 2: muestreo Poisson (N = 10)</h2>
 <div class="enun"><b>Enunciado.</b> Se estima la estatura (cm) de N = 10 estudiantes con muestreo Poisson. Cada uno tiene su estatura yₖ, su probabilidad de inclusión πₖ y su número aleatorio εₖ. (a) Estimar el total poblacional y calcular la varianza estimada. (b) Calcular el coeficiente de variabilidad y un intervalo de confianza para t_y.</div>
@@ -142,6 +153,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em}
 <div class="ans"><b>Conclusión (copiar así):</b> el CV es muy alto y el intervalo es enorme; la estimación es poco precisa porque la muestra tiene solo 2 unidades.</div>
 <p class="ord"><b>Orden para memorizar:</b> εₖ &lt; πₖ → yₖ/πₖ → t̂ → V̂ → √V̂ → CV → IC.</p>
 
+<a class="top" href="#top">↑ Índice</a>
 <!-- ============ EJERCICIO 3 ============ -->
 <h2 id="e3">Ejercicio 3: muestreo PPT (N = 15), método Acumulativo Total</h2>
 <div class="enun"><b>Enunciado.</b> N = 15 viviendas de una manzana, con consumo mensual de agua y (L) y área x (m²). Las viviendas con más área pesan más (muestreo PPT). Con el método Acumulativo Total y los números U(0, 1): 0,4; 0,62; 0,92; 0,14. (a) Estimar el total poblacional y calcular la varianza estimada. (b) Calcular el coeficiente de variabilidad y un intervalo de confianza para t_y.</div>
@@ -189,6 +201,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em}
 <div class="ans"><b>Respuesta:</b> t̂ = 2054,93 L · V̂ = 148 193 · CV = 18,7 % · IC 95 % = (1300,4 ; 2809,5).</div>
 <p class="ord"><b>Orden para memorizar:</b> X → acumulados → ubicar U → pₖ → yₖ/pₖ → t̂ → V̂ → √V̂ → CV → IC.</p>
 
+<a class="top" href="#top">↑ Índice</a>
 <!-- ============ LAHIRI ============ -->
 <h2 id="e3l">Ejercicio 3: método de Lahiri</h2>
 <div class="enun"><b>Enunciado.</b> Mismos datos del Ejercicio 3 (tabla de arriba). Con el método de Lahiri se obtuvieron estos pares (k, η): (12, 86), (2, 200), (13, 212), (8, 104), (12, 222). (a) Estimar el total poblacional y calcular la varianza estimada. (b) Calcular el coeficiente de variabilidad y un intervalo de confianza para t_y.</div>
@@ -221,6 +234,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em}
 <div class="ans"><b>Respuesta:</b> t̂ = 1482,41 L · V̂ = 50 995 · CV = 15,2 % · IC 95 % = (1039,8 ; 1925,0).</div>
 <p class="ord"><b>Orden para memorizar:</b> x_máx → η ≤ xₖ → muestra → pₖ → yₖ/pₖ → t̂ → V̂ → √V̂ → CV → IC. Desde el paso 5 es idéntico al Acumulativo Total.</p>
 
+<a class="top" href="#top">↑ Índice</a>
 <!-- ============ SUNTER ============ -->
 <h2 id="e3s">Ejercicio 3: muestreo πPT, algoritmo de Sunter (n = 4)</h2>
 <div class="enun"><b>Enunciado.</b> Mismos datos del Ejercicio 3. Se aplica muestreo πPT y se ejecuta el algoritmo de Sunter para una muestra de tamaño 4, con estos εₖ (k = 1 a 15, en orden): 0,68; 0,87; 0,82; 0,62; 0,92; 0,10; 0,49; 0,51; 0,16; 0,34; 0,17; 0,65; 0,35; 0,39; 0,21. (a) Estimar el total poblacional y calcular la varianza estimada. (b) Calcular el coeficiente de variabilidad y un intervalo de confianza para t_y.</div>
@@ -259,6 +273,8 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em}
 </ol>
 <div class="ans"><b>Respuesta:</b> t̂ = 2268,84 L · V̂ = 24 328 · CV = 6,9 % · IC 95 % = (1963,1 ; 2574,5).</div>
 <p class="ord"><b>Orden para memorizar:</b> λₖ → εₖ &lt; λₖ → muestra → πₖ → yₖ/πₖ → t̂ → yₖ/pₖ → V̂ → √V̂ → CV → IC.</p>
+<a class="top" href="#top">↑ Índice</a>
 </main>
+<script>document.querySelectorAll("table").forEach(function(t){var r=t.rows,h=[].map.call(r[0].cells,function(c){return c.textContent});r[0].className="hd";for(var i=1;i<r.length;i++)[].forEach.call(r[i].cells,function(c,j){c.setAttribute("data-label",h[j]||"")})});</script>
 </body>
 </html>
