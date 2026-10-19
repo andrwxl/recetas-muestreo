@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recetas de muestreo</title>
+<style>
+:root{--bg:#fbfaf7;--fg:#1d1d1f;--muted:#6b6b70;--card:#fff;--line:#e4e2dc;--accent:#1f5fa8;--ok:#e8f3ea;--okb:#2e7d3c;--note:#fff6e0;--noteb:#c58a00;--th:#f1efe9}
+@media (prefers-color-scheme:dark){:root{--bg:#141416;--fg:#ececef;--muted:#a0a0a8;--card:#1d1d21;--line:#33333a;--accent:#7fb2ff;--ok:#1a2c1e;--okb:#6cc47c;--note:#2e2614;--noteb:#e0b040;--th:#26262c}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+main{max-width:860px;margin:0 auto;padding:24px 16px 80px}
+h1{font-size:1.9rem;margin:0 0 4px}
+.meta{color:var(--muted);margin:0 0 8px}
+nav{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 0;margin:16px 0 8px;display:flex;flex-wrap:wrap;gap:6px;z-index:5}
+nav a{font-size:.85rem;padding:4px 10px;border:1px solid var(--line);border-radius:99px;text-decoration:none;color:var(--accent);background:var(--card)}
+h2{font-size:1.45rem;margin:40px 0 8px;padding-top:8px;border-top:3px solid var(--accent)}
+h3{font-size:1.15rem;margin:28px 0 8px}
+.enun{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.tw{overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:.9rem;background:var(--card)}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:center;white-space:nowrap}
+th{background:var(--th)}
+td.l{text-align:left;white-space:normal}
+tr.yes td{background:var(--ok);font-weight:600}
+ol li{margin:4px 0}
+ol ul{margin:4px 0;padding-left:20px}
+.ans{background:var(--ok);border-left:4px solid var(--okb);padding:10px 14px;border-radius:6px;margin:12px 0}
+.note{background:var(--note);border-left:4px solid var(--noteb);padding:10px 14px;border-radius:6px;margin:12px 0}
+.ord{color:var(--muted);font-size:.92rem}
+code{font-family:ui-monospace,Menlo,monospace;font-size:.92em}
+</style>
+</head>
+<body>
+<main>
+<h1>Recetas de muestreo: ejercicios 1 a 3</h1>
+<p class="meta">19 oct. 2026 · @LoremIpsum</p>
+<p>Cada ejercicio va como receta: qué piden, pasos numerados con el número que sale de cada uno, y la respuesta final.</p>
+
+<nav>
+<a href="#e1">1 · Sistemático</a><a href="#e2">2 · Poisson</a><a href="#e3">3 · PPT Acumulativo</a><a href="#e3l">3 · Lahiri</a><a href="#e3s">3 · Sunter</a>
+</nav>
+
+<!-- ============ EJERCICIO 1 ============ -->
+<h2 id="e1">Ejercicio 1: muestreo sistemático (N = 20, a = 3 muestras)</h2>
+<div class="enun"><b>Enunciado.</b> N = 20 viviendas con su área en m². Muestreo sistemático con 3 subgrupos; se elige la muestra r = 3. (a) Estimar el total poblacional. (b) Calcular el ANOVA y el coeficiente de correlación intra-clase. (c) Calcular el efecto del diseño y dar conclusiones. (d) Diseño q-sistemático con r = 1 y r = 2: total, varianza estimada y coeficiente de variabilidad.</div>
+<p><b>Paso previo para todo el ejercicio:</b> armar las 3 muestras (se parte de r y se salta de 3 en 3).</p>
+<div class="tw"><table>
+<tr><th>Muestra</th><th>Unidades</th><th>Áreas (m²)</th><th>Total Tᵣ</th><th>nᵣ</th></tr>
+<tr><td>r = 1</td><td>1, 4, 7, 10, 13, 16, 19</td><td>132, 153, 85, 151, 165, 117, 123</td><td>926</td><td>7</td></tr>
+<tr><td>r = 2</td><td>2, 5, 8, 11, 14, 17, 20</td><td>179, 92, 141, 180, 134, 186, 97</td><td>1009</td><td>7</td></tr>
+<tr><td>r = 3</td><td>3, 6, 9, 12, 15, 18</td><td>174, 73, 81, 164, 196, 93</td><td>781</td><td>6</td></tr>
+<tr><th>Suma</th><th></th><th></th><th>T = 2716</th><th>N = 20</th></tr>
+</table></div>
+
+<h3>1.a Total poblacional</h3>
+<ol>
+<li>Tomar la muestra r = 3: unidades 3, 6, 9, 12, 15, 18.</li>
+<li>Sumar sus áreas: 174 + 73 + 81 + 164 + 196 + 93 = 781.</li>
+<li>Expandir: t̂ = a · Σy = 3 · 781 = 2343 m².</li>
+</ol>
+<div class="ans"><b>Respuesta:</b> t̂ = 2343 m².</div>
+
+<h3>1.b ANOVA y correlación intra-clase (δ)</h3>
+<ol>
+<li>Totales y tamaños de cada muestra: T₁ = 926, T₂ = 1009, T₃ = 781; n₁ = 7, n₂ = 7, n₃ = 6. Total general T = 2716.</li>
+<li>Elevar cada área al cuadrado y sumar: Σy² = 132² + 179² + … + 97² = 397 776.</li>
+<li>T²/N = 2716² / 20 = 368 832,8 (se reutiliza).</li>
+<li>SST = Σy² − T²/N = 397 776 − 368 832,8 = 28 943,2.</li>
+<li>Σ Tᵣ²/nᵣ = 926²/7 + 1009²/7 + 781²/6 = 122 496,57 + 145 440,14 + 101 660,17 = 369 596,88.</li>
+<li>SSB = Σ Tᵣ²/nᵣ − T²/N = 369 596,88 − 368 832,8 = 764,08.</li>
+<li>SSW = SST − SSB = 28 943,2 − 764,08 = 28 179,12.</li>
+<li>Grados de libertad: entre = a − 1 = 2; dentro = N − a = 17; total = N − 1 = 19.</li>
+<li>Cuadrados medios (CM = SC ÷ gl): 764,08 / 2 = 382,04; 28 179,12 / 17 = 1657,60.</li>
+<li>F = CM entre ÷ CM dentro = 382,04 / 1657,60 = 0,23.</li>
+<li>δ = 1 − [(N − 1)/(N − a)] · (SSW/SST) = 1 − (19/17) · (28 179,12 / 28 943,2) = −0,088.</li>
+</ol>
+<div class="tw"><table>
+<tr><th>Fuente</th><th>SC</th><th>gl</th><th>CM</th><th>F</th></tr>
+<tr><td class="l">Entre muestras</td><td>764,08</td><td>2</td><td>382,04</td><td>0,23</td></tr>
+<tr><td class="l">Dentro</td><td>28 179,12</td><td>17</td><td>1657,60</td><td></td></tr>
+<tr><td class="l">Total</td><td>28 943,20</td><td>19</td><td></td><td></td></tr>
+</table></div>
+<div class="ans"><b>Respuesta:</b> la tabla ANOVA de arriba y δ = −0,088.</div>
+<p class="ord"><b>Orden para memorizar:</b> T → Σy² → T²/N → SST → SSB → SSW → gl → CM → F → δ.</p>
+
+<h3>1.c Efecto del diseño (deff)</h3>
+<ol>
+<li>Tamaño promedio de muestra: n̄ = N / a = 20 / 3 = 6,67.</li>
+<li>Traer δ de 1.b: δ = −0,088.</li>
+<li>deff = 1 + (n̄ − 1) · δ = 1 + (5,67)(−0,088) = 0,50.</li>
+</ol>
+<div class="ans"><b>Conclusión (copiar así):</b> deff = 0,50 es menor que 1, por lo tanto el muestreo sistemático es más preciso que el aleatorio simple; su varianza es aproximadamente la mitad.</div>
+<p class="ord"><b>Regla:</b> deff &lt; 1 → el sistemático es mejor · deff = 1 → iguales · deff &gt; 1 → el sistemático es peor.</p>
+
+<h3>1.d q-sistemático (q = 2 muestras elegidas: r = 1 y r = 2)</h3>
+<ol>
+<li>Totales de las muestras elegidas: T₁ = 926, T₂ = 1009; suma = 1935.</li>
+<li>Total estimado: t̂ = (a/q) · ΣTᵣ = (3/2)(1935) = 2902,5.</li>
+<li>Promedio de los totales: T̄ = 1935 / 2 = 967,5.</li>
+<li>Varianza de los totales: s² = Σ(Tᵣ − T̄)² / (q − 1) = [(926 − 967,5)² + (1009 − 967,5)²] / 1 = (1722,25 + 1722,25) / 1 = 3444,5.</li>
+<li>Varianza estimada: V̂ = a² · (1 − q/a) / q · s² = 9 · (1/3) / 2 · 3444,5 = 1,5 · 3444,5 = 5166,75.</li>
+<li>Error estándar: √5166,75 = 71,88.</li>
+<li>CV = error estándar / t̂ = 71,88 / 2902,5 = 0,0248 → 2,48 %.</li>
+</ol>
+<div class="ans"><b>Respuesta:</b> t̂ = 2902,5 m² · V̂ = 5166,75 · CV = 2,48 % (menor que 5 %: estimación muy precisa).</div>
+<p class="ord"><b>Orden:</b> T₁, T₂ → t̂ → T̄ → s² → V̂ → √V̂ → CV.</p>
+<div class="note"><b>Nota:</b> la fórmula de δ y la de V̂ son las de Särndal; si tu curso usa otra versión, cambia solo esa fórmula y el resto de la receta se mantiene.</div>
+
+<!-- ============ EJERCICIO 2 ============ -->
+<h2 id="e2">Ejercicio 2: muestreo Poisson (N = 10)</h2>
+<div class="enun"><b>Enunciado.</b> Se estima la estatura (cm) de N = 10 estudiantes con muestreo Poisson. Cada uno tiene su estatura yₖ, su probabilidad de inclusión πₖ y su número aleatorio εₖ. (a) Estimar el total poblacional y calcular la varianza estimada. (b) Calcular el coeficiente de variabilidad y un intervalo de confianza para t_y.</div>
+<div class="tw"><table>
+<tr><th>k</th><th>yₖ (cm)</th><th>πₖ</th><th>εₖ</th><th>¿entra? (εₖ &lt; πₖ)</th></tr>
+<tr class="yes"><td>1</td><td>167</td><td>0,13</td><td>0,02</td><td>sí</td></tr>
+<tr><td>2</td><td>151</td><td>0,02</td><td>0,68</td><td>no</td></tr>
+<tr><td>3</td><td>156</td><td>0,17</td><td>0,67</td><td>no</td></tr>
+<tr><td>4</td><td>172</td><td>0,08</td><td>0,68</td><td>no</td></tr>
+<tr><td>5</td><td>183</td><td>0,08</td><td>0,19</td><td>no</td></tr>
+<tr><td>6</td><td>150</td><td>0,04</td><td>0,96</td><td>no</td></tr>
+<tr class="yes"><td>7</td><td>159</td><td>0,21</td><td>0,11</td><td>sí</td></tr>
+<tr><td>8</td><td>182</td><td>0,10</td><td>0,71</td><td>no</td></tr>
+<tr><td>9</td><td>155</td><td>0,02</td><td>0,25</td><td>no</td></tr>
+<tr><td>10</td><td>161</td><td>0,15</td><td>0,75</td><td>no</td></tr>
+</table></div>
+<h3>Receta</h3>
+<ol>
+<li>Quién entra a la muestra: la unidad k entra si εₖ &lt; πₖ. Entran las unidades 1 y 7 (última columna).</li>
+<li>Calcular yₖ/πₖ de cada unidad de la muestra: 167 / 0,13 = 1284,62 · 159 / 0,21 = 757,14.</li>
+<li><b>a.</b> Total: t̂ = Σ yₖ/πₖ = 1284,62 + 757,14 = 2041,76 cm.</li>
+<li><b>a.</b> Varianza estimada: V̂ = Σ (1 − πₖ) · (yₖ/πₖ)²
+<ul><li>Unidad 1: (1 − 0,13) · 1284,62² = 0,87 · 1 650 237 = 1 435 707</li>
+<li>Unidad 7: (1 − 0,21) · 757,14² = 0,79 · 573 265 = 452 880</li>
+<li>V̂ = 1 888 586</li></ul></li>
+<li><b>b.</b> Error estándar: √1 888 586 = 1374,26.</li>
+<li><b>b.</b> CV = error estándar / t̂ = 1374,26 / 2041,76 = 0,673 → 67,3 %.</li>
+<li><b>b.</b> Intervalo de confianza: t̂ ± z · error estándar. El enunciado no da el nivel, se usa 95 % (z = 1,96): 1,96 · 1374,26 = 2693,54.
+<ul><li>Inferior: 2041,76 − 2693,54 = −651,8</li>
+<li>Superior: 2041,76 + 2693,54 = 4735,3</li></ul></li>
+</ol>
+<div class="ans"><b>Respuesta:</b> t̂ = 2041,76 cm · V̂ = 1 888 586 · CV = 67,3 % · IC 95 % = (−651,8 ; 4735,3).</div>
+<div class="ans"><b>Conclusión (copiar así):</b> el CV es muy alto y el intervalo es enorme; la estimación es poco precisa porque la muestra tiene solo 2 unidades.</div>
+<p class="ord"><b>Orden para memorizar:</b> εₖ &lt; πₖ → yₖ/πₖ → t̂ → V̂ → √V̂ → CV → IC.</p>
+
+<!-- ============ EJERCICIO 3 ============ -->
+<h2 id="e3">Ejercicio 3: muestreo PPT (N = 15), método Acumulativo Total</h2>
+<div class="enun"><b>Enunciado.</b> N = 15 viviendas de una manzana, con consumo mensual de agua y (L) y área x (m²). Las viviendas con más área pesan más (muestreo PPT). Con el método Acumulativo Total y los números U(0, 1): 0,4; 0,62; 0,92; 0,14. (a) Estimar el total poblacional y calcular la varianza estimada. (b) Calcular el coeficiente de variabilidad y un intervalo de confianza para t_y.</div>
+<p>Datos y acumulados (X = suma de las áreas = 2688). Esta tabla se reutiliza en Lahiri y Sunter.</p>
+<div class="tw"><table>
+<tr><th>k</th><th>y consumo (L)</th><th>x área (m²)</th><th>acumulado</th><th>acum ÷ 2688</th></tr>
+<tr><td>1</td><td>105</td><td>213</td><td>213</td><td>0,0792</td></tr>
+<tr><td>2</td><td>94</td><td>105</td><td>318</td><td>0,1183</td></tr>
+<tr class="yes"><td>3</td><td>108</td><td>185</td><td>503</td><td>0,1871</td></tr>
+<tr><td>4</td><td>110</td><td>155</td><td>658</td><td>0,2448</td></tr>
+<tr><td>5</td><td>97</td><td>133</td><td>791</td><td>0,2943</td></tr>
+<tr><td>6</td><td>157</td><td>206</td><td>997</td><td>0,3709</td></tr>
+<tr class="yes"><td>7</td><td>113</td><td>245</td><td>1242</td><td>0,4621</td></tr>
+<tr><td>8</td><td>118</td><td>164</td><td>1406</td><td>0,5231</td></tr>
+<tr><td>9</td><td>123</td><td>169</td><td>1575</td><td>0,5859</td></tr>
+<tr class="yes"><td>10</td><td>190</td><td>198</td><td>1773</td><td>0,6596</td></tr>
+<tr><td>11</td><td>177</td><td>191</td><td>1964</td><td>0,7307</td></tr>
+<tr><td>12</td><td>115</td><td>246</td><td>2210</td><td>0,8222</td></tr>
+<tr><td>13</td><td>137</td><td>146</td><td>2356</td><td>0,8765</td></tr>
+<tr class="yes"><td>14</td><td>158</td><td>150</td><td>2506</td><td>0,9323</td></tr>
+<tr><td>15</td><td>185</td><td>182</td><td>2688</td><td>1,0000</td></tr>
+</table></div>
+<h3>Receta</h3>
+<ol>
+<li>Sumar las áreas: X = 213 + 105 + … + 182 = 2688.</li>
+<li>Acumular las áreas una por una y dividir cada acumulado entre 2688 (tabla de arriba).</li>
+<li>Ubicar cada U: se elige la primera unidad cuyo acumulado ÷ 2688 es mayor que U.
+<ul><li>0,40 → cae entre 0,3709 y 0,4621 → unidad 7</li>
+<li>0,62 → entre 0,5859 y 0,6596 → unidad 10</li>
+<li>0,92 → entre 0,8765 y 0,9323 → unidad 14</li>
+<li>0,14 → entre 0,1183 y 0,1871 → unidad 3</li></ul></li>
+<li>pₖ = área ÷ 2688 de cada elegida: p₇ = 245/2688 = 0,0911 · p₁₀ = 198/2688 = 0,0737 · p₁₄ = 150/2688 = 0,0558 · p₃ = 185/2688 = 0,0688.</li>
+<li>yₖ/pₖ (consumo ÷ pₖ): 113 / 0,0911 = 1239,8 · 190 / 0,0737 = 2579,4 · 158 / 0,0558 = 2831,4 · 108 / 0,0688 = 1569,2.</li>
+<li><b>a.</b> Total: t̂ = (1/n) · Σ yₖ/pₖ, con n = 4. Suma = 8219,74 → t̂ = 8219,74 / 4 = 2054,93 L.</li>
+<li><b>a.</b> Varianza estimada: V̂ = [1 / (n(n − 1))] · Σ (yₖ/pₖ − t̂)²
+<ul><li>(1239,8 − 2054,93)² = 664 490</li>
+<li>(2579,4 − 2054,93)² = 275 058</li>
+<li>(2831,4 − 2054,93)² = 602 837</li>
+<li>(1569,2 − 2054,93)² = 235 927</li>
+<li>Suma = 1 778 313 → V̂ = 1 778 313 / (4 · 3) = 148 193</li></ul></li>
+<li><b>b.</b> Error estándar: √148 193 = 384,96.</li>
+<li><b>b.</b> CV = 384,96 / 2054,93 = 0,187 → 18,7 %.</li>
+<li><b>b.</b> IC 95 %: t̂ ± 1,96 · error estándar (el enunciado no da el nivel). 1,96 · 384,96 = 754,5 → (1300,4 ; 2809,5).</li>
+</ol>
+<div class="ans"><b>Respuesta:</b> t̂ = 2054,93 L · V̂ = 148 193 · CV = 18,7 % · IC 95 % = (1300,4 ; 2809,5).</div>
+<p class="ord"><b>Orden para memorizar:</b> X → acumulados → ubicar U → pₖ → yₖ/pₖ → t̂ → V̂ → √V̂ → CV → IC.</p>
+
+<!-- ============ LAHIRI ============ -->
+<h2 id="e3l">Ejercicio 3: método de Lahiri</h2>
+<div class="enun"><b>Enunciado.</b> Mismos datos del Ejercicio 3 (tabla de arriba). Con el método de Lahiri se obtuvieron estos pares (k, η): (12, 86), (2, 200), (13, 212), (8, 104), (12, 222). (a) Estimar el total poblacional y calcular la varianza estimada. (b) Calcular el coeficiente de variabilidad y un intervalo de confianza para t_y.</div>
+<h3>Receta</h3>
+<ol>
+<li>Máximo de las áreas: x_máx = 246 (unidad 12). Es el tope de los η.</li>
+<li>Regla de Lahiri: se acepta el par (k, η) si η ≤ xₖ; si η &gt; xₖ se rechaza.</li>
+<li>Revisar cada par:
+<div class="tw"><table>
+<tr><th>Par</th><th>k</th><th>η</th><th>xₖ (área)</th><th>¿η ≤ xₖ?</th></tr>
+<tr class="yes"><td>1</td><td>12</td><td>86</td><td>246</td><td>sí</td></tr>
+<tr><td>2</td><td>2</td><td>200</td><td>105</td><td>no</td></tr>
+<tr><td>3</td><td>13</td><td>212</td><td>146</td><td>no</td></tr>
+<tr class="yes"><td>4</td><td>8</td><td>104</td><td>164</td><td>sí</td></tr>
+<tr class="yes"><td>5</td><td>12</td><td>222</td><td>246</td><td>sí</td></tr>
+</table></div></li>
+<li>Muestra (con reemplazo, la unidad 12 sale dos veces): unidades 12, 8, 12, n = 3.</li>
+<li>pₖ = área ÷ 2688: p₁₂ = 246/2688 = 0,0915 · p₈ = 164/2688 = 0,0610.</li>
+<li>yₖ/pₖ (consumo ÷ pₖ): 115 / 0,0915 = 1256,6 · 118 / 0,0610 = 1934,0 · 115 / 0,0915 = 1256,6.</li>
+<li><b>a.</b> Total: t̂ = (1/n) · Σ yₖ/pₖ = (1256,6 + 1934,0 + 1256,6) / 3 = 4447,22 / 3 = 1482,41 L.</li>
+<li><b>a.</b> Varianza estimada: V̂ = [1 / (n(n − 1))] · Σ (yₖ/pₖ − t̂)²
+<ul><li>(1256,6 − 1482,41)² = 50 995</li>
+<li>(1934,0 − 1482,41)² = 203 981</li>
+<li>(1256,6 − 1482,41)² = 50 995</li>
+<li>Suma = 305 971 → V̂ = 305 971 / (3 · 2) = 50 995</li></ul></li>
+<li><b>b.</b> Error estándar: √50 995 = 225,82.</li>
+<li><b>b.</b> CV = 225,82 / 1482,41 = 0,152 → 15,2 %.</li>
+<li><b>b.</b> IC 95 %: t̂ ± 1,96 · error estándar = 1482,41 ± 442,6 → (1039,8 ; 1925,0).</li>
+</ol>
+<div class="ans"><b>Respuesta:</b> t̂ = 1482,41 L · V̂ = 50 995 · CV = 15,2 % · IC 95 % = (1039,8 ; 1925,0).</div>
+<p class="ord"><b>Orden para memorizar:</b> x_máx → η ≤ xₖ → muestra → pₖ → yₖ/pₖ → t̂ → V̂ → √V̂ → CV → IC. Desde el paso 5 es idéntico al Acumulativo Total.</p>
+
+<!-- ============ SUNTER ============ -->
+<h2 id="e3s">Ejercicio 3: muestreo πPT, algoritmo de Sunter (n = 4)</h2>
+<div class="enun"><b>Enunciado.</b> Mismos datos del Ejercicio 3. Se aplica muestreo πPT y se ejecuta el algoritmo de Sunter para una muestra de tamaño 4, con estos εₖ (k = 1 a 15, en orden): 0,68; 0,87; 0,82; 0,62; 0,92; 0,10; 0,49; 0,51; 0,16; 0,34; 0,17; 0,65; 0,35; 0,39; 0,21. (a) Estimar el total poblacional y calcular la varianza estimada. (b) Calcular el coeficiente de variabilidad y un intervalo de confianza para t_y.</div>
+<div class="note"><b>Supuestos de esta receta (confírmalos con tu material de clase):</b> las unidades se recorren en el orden de la tabla (k = 1, 2, …) y se usa la regla de Sunter λₖ = nₖ · xₖ / (Σ x de k en adelante), donde nₖ = cuántas unidades faltan elegir. La varianza usa la aproximación con pₖ = πₖ/n, porque en Sunter no se conocen los πₖₗ.</div>
+<h3>Receta</h3>
+<ol>
+<li>Inicio: faltan nₖ = 4 unidades. Recorrer k = 1, 2, 3, … hasta completar 4.</li>
+<li>Para cada k calcular λₖ = nₖ · xₖ / (suma de las áreas de k hasta 15), y entra si εₖ &lt; λₖ. Cada vez que entra una unidad, nₖ baja en 1.
+<div class="tw"><table>
+<tr><th>k</th><th>xₖ</th><th>faltan nₖ</th><th>Σ x de k a 15</th><th>λₖ</th><th>εₖ</th><th>¿entra?</th></tr>
+<tr><td>1</td><td>213</td><td>4</td><td>2688</td><td>0,3170</td><td>0,68</td><td>no</td></tr>
+<tr><td>2</td><td>105</td><td>4</td><td>2475</td><td>0,1697</td><td>0,87</td><td>no</td></tr>
+<tr><td>3</td><td>185</td><td>4</td><td>2370</td><td>0,3122</td><td>0,82</td><td>no</td></tr>
+<tr><td>4</td><td>155</td><td>4</td><td>2185</td><td>0,2838</td><td>0,62</td><td>no</td></tr>
+<tr><td>5</td><td>133</td><td>4</td><td>2030</td><td>0,2621</td><td>0,92</td><td>no</td></tr>
+<tr class="yes"><td>6</td><td>206</td><td>4</td><td>1897</td><td>0,4344</td><td>0,10</td><td>sí</td></tr>
+<tr><td>7</td><td>245</td><td>3</td><td>1691</td><td>0,4347</td><td>0,49</td><td>no</td></tr>
+<tr><td>8</td><td>164</td><td>3</td><td>1446</td><td>0,3402</td><td>0,51</td><td>no</td></tr>
+<tr class="yes"><td>9</td><td>169</td><td>3</td><td>1282</td><td>0,3955</td><td>0,16</td><td>sí</td></tr>
+<tr class="yes"><td>10</td><td>198</td><td>2</td><td>1113</td><td>0,3558</td><td>0,34</td><td>sí</td></tr>
+<tr class="yes"><td>11</td><td>191</td><td>1</td><td>915</td><td>0,2087</td><td>0,17</td><td>sí</td></tr>
+</table></div></li>
+<li>Muestra: unidades 6, 9, 10, 11 (ya son 4, se detiene).</li>
+<li>Probabilidad de inclusión πₖ = n · xₖ / X = 4 · xₖ / 2688: π₆ = 0,3065 · π₉ = 0,2515 · π₁₀ = 0,2946 · π₁₁ = 0,2842.</li>
+<li>yₖ/πₖ (consumo ÷ πₖ): 157 / 0,3065 = 512,16 · 123 / 0,2515 = 489,09 · 190 / 0,2946 = 644,85 · 177 / 0,2842 = 622,74.</li>
+<li><b>a.</b> Total (Horvitz-Thompson): t̂ = Σ yₖ/πₖ = 2268,84 L.</li>
+<li><b>a.</b> Varianza estimada: con pₖ = πₖ/4, calcular yₖ/pₖ = 2048,62; 1956,36; 2579,39; 2490,97. Luego V̂ = [1 / (n(n − 1))] · Σ (yₖ/pₖ − t̂)²
+<ul><li>(2048,62 − 2268,84)² = 48 495</li>
+<li>(1956,36 − 2268,84)² = 97 644</li>
+<li>(2579,39 − 2268,84)² = 96 446</li>
+<li>(2490,97 − 2268,84)² = 49 345</li>
+<li>Suma = 291 930 → V̂ = 291 930 / (4 · 3) = 24 328</li></ul></li>
+<li><b>b.</b> Error estándar: √24 328 = 155,97.</li>
+<li><b>b.</b> CV = 155,97 / 2268,84 = 0,0687 → 6,9 %.</li>
+<li><b>b.</b> IC 95 %: t̂ ± 1,96 · error estándar = 2268,84 ± 305,7 → (1963,1 ; 2574,5).</li>
+</ol>
+<div class="ans"><b>Respuesta:</b> t̂ = 2268,84 L · V̂ = 24 328 · CV = 6,9 % · IC 95 % = (1963,1 ; 2574,5).</div>
+<p class="ord"><b>Orden para memorizar:</b> λₖ → εₖ &lt; λₖ → muestra → πₖ → yₖ/πₖ → t̂ → yₖ/pₖ → V̂ → √V̂ → CV → IC.</p>
+</main>
+</body>
+</html>
